@@ -7,13 +7,38 @@ master account for example a GitHub.com account for your teams bot.
 ### How it works via SMS:
 
 **New Token**
-- Register a 2fa token via POST /register
+- Register a 2fa token via POST /register API
 - The 2fa code is sent via SMS to the registered users
 
 **Request a Token**
-- Send an SMS to your Twilio number
+- Send an SMS to your inbound number
+
+  ```
+    SMS: +447123123456
+    launch github
+  ```
+
 - A signing request is sent to the other members of your team to approve
-- Once another team member approves the request it is sent via SMS to the requester
+
+  ```
+    user1 has requested launch of github do you concur? reply yes or no
+  ```
+
+- Once another team member approves / denies the request it is sent via SMS to
+  the requester
+
+  ```
+    launch has confirmed by user2 Your launch token is 123456
+  ```
+
+  or
+
+  ```
+    launch was denied by user2. Maybe check your following orders before trying
+    again
+  ```
+
+
 
 ## How it works via hubot:
 
@@ -21,16 +46,17 @@ master account for example a GitHub.com account for your teams bot.
 - Tell Hubot to register a token:
 
   ```
-    You: hubot 2fa add github base32secret3232
-    Hubot: I registered github and text you the 2FA token to complete setup
+    You: hubot 2fa silo github base32secret3232
+    Hubot: I added github to the arsenal and have text you the launch code to
+    complete setup
   ```
 
 **Request a Token**
 - Ask hubot!
 
   ```
-    You: hubot 2fa token github
-    Hubot: @user2 @user3 is this ok?
-    User2: hubot 2fa approve
-    Hubot: @user1 I text you the 2FA code
+    You: hubot 2fa launch github
+    Hubot: @user2 @user3 do you confirm the order?
+    User2: hubot 2fa i concur
+    Hubot: @user1 I have text you the launch code
   ```

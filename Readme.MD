@@ -7,7 +7,7 @@ master account for example a GitHub.com account for your teams bot.
 ### How it works via SMS:
 
 **New Token**
-- Register a 2fa token via POST /register API
+- Register a 2fa token via POST /enroll API
 - The 2fa code is sent via SMS to the registered users
 
 **Request a Token**
@@ -21,14 +21,15 @@ master account for example a GitHub.com account for your teams bot.
 - A signing request is sent to the other members of your team to approve
 
   ```
-    user1 has requested launch of github do you concur? reply yes or no
+    user1 has requested launch keys for github do you concur? reply with 'go jewhg'
+    to concur or 'abort jewhg' to abort
   ```
 
 - Once another team member approves / denies the request it is sent via SMS to
   the requester
 
   ```
-    launch has confirmed by user2 Your launch token is 123456
+    launch was confirmed by user2 Your launch token is 123456
   ```
 
   or
@@ -60,3 +61,12 @@ master account for example a GitHub.com account for your teams bot.
     User2: hubot 2fa i concur
     Hubot: @user1 I have text you the launch code
   ```
+
+## Configuration
+
+We use environment variables for easy deployment to Heroku in development you
+can use foreman and dotenv
+
+SECRET_KEY_BASE=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+TWILIO_ACCOUNT_SID=ACxxxxxxxxxxxxxxxxxxxxxxxx
+TWILIO_AUTH_TOKEN=yyyyyyyyyyyyyyyyyyyyyyyyy

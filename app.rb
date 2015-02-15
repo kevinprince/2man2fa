@@ -2,6 +2,7 @@ require 'bundler/setup'
 require 'sinatra'
 require 'dotenv'
 require 'data_mapper'
+require 'gibberish'
 
 Dotenv.load
 
@@ -13,7 +14,7 @@ class Key
 
   property :id,     Serial
   property :name,   String, unique: true
-  property :token,  Text
+  property :token,  Json
 end
 
 # Launchkey - Stores all the keys
@@ -43,7 +44,10 @@ post '/enlist' do
   halt 412 if token.nil?
   halt 412 if token.length > 32
 
-  key = Key.create('name': name, 'token': token)
+  cipher = Gibberish::AES.new(ENV['SECRET_KEY_BASE'])
+  encrypted_token = cipher.encrypt token
+
+  key = Key.create('name': name, 'token': encrypted_token)
 
   halt 409 if key.saved? == false
 

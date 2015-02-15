@@ -1,4 +1,10 @@
 GIT
+  remote: git@github.com:mdp/gibberish.git
+  revision: 6dee8f7e6e9def1a3575560a6f2fd3c719a99105
+  specs:
+    gibberish (2.0.0)
+
+GIT
   remote: git@github.com:sinatra/sinatra.git
   revision: 9929353e6c59f07b8f6d98002778e0dc4a7faf3a
   specs:
@@ -154,6 +160,7 @@ DEPENDENCIES
   dm-postgres-adapter
   dotenv
   foreman
+  gibberish!
   lograge
   rspec
   sinatra!

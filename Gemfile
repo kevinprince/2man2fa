@@ -7,6 +7,7 @@ gem 'bcrypt'
 gem 'data_mapper'
 gem 'dm-postgres-adapter'
 gem 'lograge'
+gem 'gibberish', git: 'git@github.com:mdp/gibberish.git'
 
 group :development, :test do
   gem 'foreman'

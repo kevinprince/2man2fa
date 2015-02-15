@@ -1,13 +1,13 @@
 # Two Man - Two Factor
 
-The idea of this app is to allow you to share two factor tokens for applications
-which have limited ability to sanely create multiple logins or to protect your
-master account for example a GitHub.com account for your teams bot.
+Generally everyone should have their own login however this is not always an
+option on for example a GitHub.com account for your teams bot. Two Man 2FA
+implements the
 
 ### How it works via SMS:
 
 **New Token**
-- Register a 2fa token via POST /enroll API
+- Register a 2fa token via POST /enlist API
 - The 2fa code is sent via SMS to the registered users
 
 **Request a Token**
@@ -47,9 +47,9 @@ master account for example a GitHub.com account for your teams bot.
 - Tell Hubot to register a token:
 
   ```
-    You: hubot 2fa silo github base32secret3232
-    Hubot: I added github to the arsenal and have text you the launch code to
-    complete setup
+    You: hubot 2fa enlist github base32secret3232
+    Hubot: I added github to the arsenal and have text a launch code
+    to the principals
   ```
 
 **Request a Token**
@@ -57,10 +57,10 @@ master account for example a GitHub.com account for your teams bot.
 
   ```
     You: hubot 2fa launch github
-    Hubot: @user2 @user3 do you confirm the order?
-    User2: hubot 2fa i concur
-    Hubot: @user1 I have text you the launch code
+    Hubot: @you I have initiated the countdown, awaiting final orders.
   ```
+
+- The rest of your team then receive their text messages as per the SMS flow
 
 ## Configuration
 
@@ -68,5 +68,6 @@ We use environment variables for easy deployment to Heroku in development you
 can use foreman and dotenv
 
 SECRET_KEY_BASE=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+PRINCIPALS=bob:12345,bill:67891,jill:19865
 TWILIO_ACCOUNT_SID=ACxxxxxxxxxxxxxxxxxxxxxxxx
 TWILIO_AUTH_TOKEN=yyyyyyyyyyyyyyyyyyyyyyyyy

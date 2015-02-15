@@ -2,7 +2,7 @@
 
 Generally everyone should have their own login however this is not always an
 option on for example a GitHub.com account for your teams bot. Two Man 2FA
-implements the
+implements the two man rule for TOTP token generation within your team.
 
 ### How it works via SMS:
 

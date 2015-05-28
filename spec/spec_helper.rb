@@ -2,6 +2,7 @@
 require 'rack/test'
 require 'rspec'
 require 'database_cleaner'
+require 'sms_spec'
 
 require File.expand_path '../../app.rb', __FILE__
 
@@ -12,8 +13,14 @@ module RSpecMixin
   def app() Sinatra::Application end
 end
 
-# For RSpec 2.x
-RSpec.configure { |c| c.include RSpecMixin }
 
 DatabaseCleaner.strategy = :truncation
 DatabaseCleaner.clean
+
+RSpec.configure do |config|
+  config.include(SmsSpec::Helpers)
+  config.include(SmsSpec::Matchers)
+  config.include RSpecMixin
+end
+
+SmsSpec.driver = 'twilio-ruby'

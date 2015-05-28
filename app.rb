@@ -4,6 +4,8 @@ require 'dotenv'
 require 'data_mapper'
 require 'gibberish'
 
+require_relative 'helpers'
+
 Dotenv.load
 
 DataMapper.setup(:default, ENV['DATABASE_URL'])
@@ -32,6 +34,7 @@ Key.auto_upgrade!
 Launch.auto_upgrade!
 
 get '/' do
+  puts principals.inspect
   'Awaiting launch instructions'
 end
 
@@ -71,4 +74,13 @@ end
 
 error 409 do
   ''
+end
+
+def principals
+  ENV['PRINCIPALS'].split(',').each do |p|
+    user = p.split(':')
+    principals[] << { name: user[0], number: user[1] }
+  end
+
+  principals
 end
